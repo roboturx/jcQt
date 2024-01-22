@@ -279,7 +279,7 @@ bool hsp_Tree_model_XML::setData(const QModelIndex &index, const QVariant &value
     return false;
 }
 
-bool hsp_Tree_model_XML::updateXMLHesapAd(HesapItem *item, QVariant &value)
+bool hsp_Tree_model_XML::updateXMLHesapAd(HesapItem *item, const QVariant &value)
 {
     qDebug() << "::Xmdl update XML hesap ad -----------";
     QSqlQuery query;

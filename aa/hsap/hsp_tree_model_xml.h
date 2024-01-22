@@ -113,7 +113,7 @@ private:
     HesapItem *rootItem;
     HesapItem *cutItem;
 
-    bool updateXMLHesapAd(HesapItem *item, QVariant &value);
+    bool updateXMLHesapAd(HesapItem *item, const QVariant &value);
 
 public slots:
     void hTurColor(QColor color);
