@@ -4,6 +4,7 @@
 #include "adrs/clsn.h"
 #include "adrs/frm.h"
 #include "hsap/hc_hdty.h"
+#include "hsap/hc_hdty_d.h"
 #include "hsap/hesapitem.h"
 #include "hsap/hsp_tree_view.h"
 #include "libs/globals.h"
@@ -30,6 +31,7 @@ public:
     hC_CLSN *clsn;
     hC_FRM  *firma ;
     hC_hDTY *hspdty;
+    hC_hDTY_D *hspdty_D;
     hsp_Tree_view *hesapTree{};
     hC_helpTree *helpTree{};
 

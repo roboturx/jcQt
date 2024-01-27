@@ -230,12 +230,18 @@ HEADERS += \
     hsap/dlg/dlg_date.h \
     hsap/dlg/dlg_hlist.h \
     hsap/dlg/dlg_r.h \
+    hsap/hc_hdty_d.h \
+    hsap/hc_hdty_d_filter_wgt.h \
+    hsap/hc_hdty_d_prxy_model.h \
     hsap/hsp_list.h
 
 SOURCES += \
     hsap/dlg/dlg_date.cpp \
     hsap/dlg/dlg_hlist.cpp \
     hsap/dlg/dlg_r.cpp \
+    hsap/hc_hdty_d.cpp \
+    hsap/hc_hdty_d_filter_wgt.cpp \
+    hsap/hc_hdty_d_prxy_model.cpp \
     hsap/hsp_list.cpp
 
 

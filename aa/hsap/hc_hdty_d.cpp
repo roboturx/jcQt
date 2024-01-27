@@ -1,4 +1,4 @@
-#include "hsap/hc_hdty.h"
+#include "hsap/hC_hDTY_D.h"
 #include "hsap/cm_dlg_cb_htur.h"
 #include "hsap/dlg/dlg_date.h"
 #include "hsap/dlg/dlg_hlist.h"
@@ -8,30 +8,30 @@
 
 
 
-hC_hDTY::hC_hDTY() : hC_tBcreator ()
+hC_hDTY_D::hC_hDTY_D() : hC_tBcreator ()
 {
     qDebug ()<<"Constructor HESAP DETAY **************************";
     //************************************************************
     //************  H E S A P  D E T A Y L A R I  ****************
 
-    win_Label->setText ( "HESAP DETAY KAYITLARI");
-    *tb_name   = "hspdty_dbtb" ;
-    *tb_ndex  = "hspdty_ad";
+    win_Label->setText ( "HESAP GÜNLÜK DEFTER KAYITLARI");
+    *tb_name   = "hspdty_d_dbtb" ;
+    *tb_ndex  = "f_hspdty_d_id";
     tb_flds = new hC_ArrD (10, 4);
 
     /// setvalue  field no, dbf değişkeni, dbfTYPE, view header, viewda görünür
 
-    tb_flds->setValue(0, "f_hspdty_ID", "INTEGER", "hspdty_ID", "0");
-    // hesaplar ile hesap detay arası key
-    tb_flds->setValue(1, "f_hspdty_hspID", "INTEGER", "hspdty_HesapID", "0");
-    tb_flds->setValue ( 2, "f_hspdty_tarih"   , "TEXT"   , "Tarih" );
-    tb_flds->setValue ( 3, "f_hspdty_no"      , "TEXT"   , "Kayıt No" );
-    tb_flds->setValue ( 4, "f_hspdty_aciklama", "TEXT"   , "Açıklama");
-    tb_flds->setValue ( 5, "f_hspdty_transfer", "TEXT"   , "İlgili Hesap");
-    tb_flds->setValue ( 6, "f_hspdty_r"       , "TEXT"   , "R");
-    tb_flds->setValue ( 7, "f_hspdty_borc"    , "TEXT"   , "BORC");
-    tb_flds->setValue ( 8, "f_hspdty_alacak"  , "TEXT"   , "ALACAK");
-    tb_flds->setValue ( 9, "f_hspdty_resim"   , "BLOB"   , "Resim","0");
+    tb_flds->setValue(  0, "f_hspdty_id", "INTEGER", "hspdty_ID", "0");
+    // hesap detay ile hesap günlük defter detay arası key
+    tb_flds->setValue ( 1, "f_hspdty_d_id"      , "INTEGER", "hspdty_D_ID", "0");
+    tb_flds->setValue ( 2, "f_hspdty_d_tarih"   , "TEXT"   , "Tarih" );
+    tb_flds->setValue ( 3, "f_hspdty_d_no"      , "TEXT"   , "Kayıt No" );
+    tb_flds->setValue ( 4, "f_hspdty_d_aciklama", "TEXT"   , "Açıklama");
+    tb_flds->setValue ( 5, "f_hspdty_d_transfer", "TEXT"   , "İlgili Hesap");
+    tb_flds->setValue ( 6, "f_hspdty_d_r"       , "TEXT"   , "R");
+    tb_flds->setValue ( 7, "f_hspdty_d_borc"    , "TEXT"   , "BORC");
+    tb_flds->setValue ( 8, "f_hspdty_d_alacak"  , "TEXT"   , "ALACAK");
+    tb_flds->setValue ( 9, "f_hspdty_d_resim"   , "BLOB"   , "Resim","0");
 
     tb_wdgts = new QList <QWidget*> ;
 
@@ -53,9 +53,9 @@ hC_hDTY::hC_hDTY() : hC_tBcreator ()
 }
 
 
-void hC_hDTY::tbsetup()
+void hC_hDTY_D::tbsetup()
 {
-    qDebug() << "0100 hspdty::tbsetup ------------------------- begins";
+    qDebug() << "0100 hspdty_D_::tbsetup ------------------------- begins";
     tbCreate ( tb_flds );
     tbModel  ( tb_flds );
     tbView   ( tb_flds );
@@ -64,13 +64,13 @@ void hC_hDTY::tbsetup()
     tbwdgt  ();
     tbui();
     tbkntrl ();
-    qDebug() << "0100 hspdty::tbsetup ------------------------- end";
+    qDebug() << "0100 hspdty_D_::tbsetup ------------------------- end";
 }
 
 
-void hC_hDTY::tbwdgt()
+void hC_hDTY_D::tbwdgt()
 {
-    qDebug() << "   0110 hspdty::tbwdgt ---- begin";
+    qDebug() << "   0110 hspdty_D_::tbwdgt ---- begin";
 
 
 
@@ -143,16 +143,16 @@ void hC_hDTY::tbwdgt()
 
     //  xx2=1;
     win_Grid->addWidget(win_Rsm       , 7, 4, 3, 2);
-    qDebug() << "   0110 hspdty::wdgt ---- end";
+    qDebug() << "   0110 hspdty_D_::wdgt ---- end";
 }
 
 
-void hC_hDTY::tbui()
+void hC_hDTY_D::tbui()
 {
 
-    qDebug() << "   0120 hspdty::tbui ---- begins";
+    qDebug() << "   0120 hspdty_D_::tbui ---- begins";
 
-    hC_hDTY::setWindowTitle (win_Label->text ());
+    hC_hDTY_D::setWindowTitle (win_Label->text ());
     this->setGeometry (20,20,1200,600);
 
     QSplitter *splitter = new QSplitter(this);
@@ -167,15 +167,15 @@ void hC_hDTY::tbui()
     win_grid->addWidget (splitter  , 0, 0, 1, 1);
     // win_grid->addWidget (win_Wdgt   , 0, 1, 1, 1);
     // win_grid->addWidget (win_hC_hsp   , 0, 0, 2, 1);
-    qDebug() << "   0120 hspdty::tbui ---- end";
+    qDebug() << "   0120 hspdty_D_::tbui ---- end";
 }
 
 
 
 
-void hC_hDTY::tbkntrl()
+void hC_hDTY_D::tbkntrl()
 {
-    qDebug() << "   0130 hspdty::tbkntrl ---- begin";
+    qDebug() << "   0130 hspdty_D_::tbkntrl ---- begin";
 
     dlg_Date *clndr = new dlg_Date;
     dlg_R *cb_R = new dlg_R();
@@ -187,7 +187,7 @@ void hC_hDTY::tbkntrl()
     tb_view->table->setItemDelegateForColumn(6, cb_R);
 
     //////////////// filtering
-    proxyModel1 = new hc_hDty_PRXYModel  (this);
+    proxyModel1 = new hC_hDty_D_PRXYModel  (this);
     // setting proxymodel1 to view
     proxyModel1->setSourceModel (tb_model);
 
@@ -221,42 +221,45 @@ void hC_hDTY::tbkntrl()
             *max_id = 10000;
         ////////////////////////////////////////////////
 
-        qDebug() << "  hc_hdty yeni kayıt KOD : " << *max_id;
+        qDebug() << "  hC_hDTY_D_D_ yeni kayıt KOD :  -- " << *max_id <<" --";
 
         QSqlQuery query;
         QString qStr, mesaj("");
 
+        qDebug() << "  hC_hDTY_D_D_ yeni kayıt KOD : 2 ";
+
         curIndex = tb_view->table->currentIndex ();
         reccount=tb_model->rowCount();
 
-        qDebug() << *tb_name;
-        qDebug() << curIndex;
-        qDebug() << reccount;
-        qDebug() << hc_hsp_currentHesapItem->hesapKod ();
-
+        qDebug() << "  hC_hDTY_D_D_ yeni kayıt KOD : 3 ";
+            qDebug() << *tb_name;
+            qDebug() << curIndex;
+            qDebug() << reccount;
+            qDebug() << hc_hsp_currentHesapItem->hesapKod ();
         qStr = QString("INSERT INTO "+*tb_name +
-                       " ( f_hspdty_hspID) "
+                       " ( f_hspdty_d_id) "
                        " values ( '"+
                        QString::number (hc_hsp_currentHesapItem->hesapKod ()+
                                        100000 // kod 100000 den başlasın
                                        )+
                        "' )")  ;
 
+        qDebug() << "  hC_hDTY_D_D_ yeni kayıt KOD : 4 ";
         if ( !query.exec(qStr) )
         {
-            mesaj = mesaj + "002x- İlk node e k l e n e m e d i ...\n/n"+
+            mesaj = mesaj + "002x_D_- İlk node e k l e n e m e d i ...\n/n"+
                     query.lastError().text ();
         }
         else
         {
-            mesaj = mesaj + "Hesap Detay Kaydı eklendi - \n";
+            mesaj = mesaj + "_D_Hesap Detay Kaydı eklendi - \n";
         }
 
 
 
         if (tb_model->submitAll())
         {
-            mesaj = mesaj +" -- SUBMITTED -- "    ;
+            mesaj = mesaj +" -- _D_SUBMITTED -- "    ;
 
             ////////////////////////////////////////////////
             /// son eklenen kayda git
@@ -266,9 +269,9 @@ void hC_hDTY::tbkntrl()
         }
         else
         {
-            mesaj = mesaj + " Hesap kaydı e k l e n e m e d i ."  ;
+            mesaj = mesaj +" _D_ Hesap kaydı e k l e n e m e d i .";
         }
-            tb_view->table->setFocus();
+        tb_view->table->setFocus();
         qDebug()<<mesaj ;
 
     });// connect ekle sonu
@@ -311,12 +314,12 @@ void hC_hDTY::tbkntrl()
             QString hspdtyID = tb_model->data
                     (tb_model->index
                      (indx.row (),
-                      tb_model->fieldIndex ("hspdty_ID"))).toString ();
+                      tb_model->fieldIndex ("f_hspdty_d_id"))).toString ();
 
             QString hesapad = tb_model->data
                     (tb_model->index
                      (indx.row (),
-                      tb_model->fieldIndex ("hspdty_ad"))).toString ();
+                      tb_model->fieldIndex ("f_hspdty_d_ad"))).toString ();
 
 
             QMessageBox::StandardButton dlg;
@@ -332,7 +335,7 @@ void hC_hDTY::tbkntrl()
                 {
                     indx2= tb_view->table->model()->
                             index(tb_view->table->currentIndex().row()  - 1, 0);
-                    qDebug() << "checkindex edddddddddddd";                }
+                    qDebug() << " _D_ checkindex edddddddddddd";                }
 
 
 
@@ -359,7 +362,7 @@ void hC_hDTY::tbkntrl()
         tb_mapper->setCurrentModelIndex(Index);
         if (!Index.isValid())
         {
-            qDebug() <<"index is invalid - tb mappper setCurrentModelIndex";
+            qDebug() <<" _D_ index is invalid - tb mappper setCurrentModelIndex";
         }
 
     });
@@ -375,31 +378,31 @@ void hC_hDTY::tbkntrl()
     });
 
 
-    qDebug() << "   0130 hspdty::tbkntrl ---- end";
+    qDebug() << "   0130 hspdty_D_::tbkntrl ---- end";
 }
 
 
-void hC_hDTY::showEvent(QShowEvent *)
+void hC_hDTY_D::showEvent(QShowEvent *)
 {
-    qDebug() << "   0140 hspdty::showevent ";
+    qDebug() << "   0140 hspdty_D_::showevent ";
 }
 
-void hC_hDTY::closeEvent(QCloseEvent *)
+void hC_hDTY_D::closeEvent(QCloseEvent *)
 {
-   qDebug() << "hspdty:: close ()";
+   qDebug() << "hspdty_D_:: close ()";
 }
 
-void hC_hDTY::slt_hesapChanged(HesapItem *currHspItem)
+void hC_hDTY_D::slt_hesapChanged(HesapItem *currHspItem)
 {
     /// hesap değiştiğinde filtre değişsin
-    qDebug() << "   0150 hC_hDTY::slt_hesapChanged ";
+    qDebug() << "   0150 hC_hDTY_D_D_::slt_hesapChanged ";
     hc_hsp_currentHesapItem = currHspItem;
  //   tb_model->setFilter(
   //      QString("f_hspdty_hspID = '%1'")
      //      .arg(hc_hsp_currentHesapItem->hesapKod ()) );
    // tb_model->select ();
 
-    qDebug() << "13"
+    qDebug() << "13_D_"
              << QString::number(hc_hsp_currentHesapItem->hesapKod ());
     // filtering proxy model1
 
@@ -420,7 +423,7 @@ void hC_hDTY::slt_hesapChanged(HesapItem *currHspItem)
     //proxyModel1->setFilterRegularExpression("[0-9]");
     //proxyModel->setFilterFixedString ("[0-9]");
         //QString::number(hc_hsp_currentHesapItem->hesapKod ()));
-    qDebug() << "131";
+    qDebug() << "_D_131";
     proxyModel1->setFilterKeyColumn(1);
 
 
@@ -430,14 +433,14 @@ void hC_hDTY::slt_hesapChanged(HesapItem *currHspItem)
 
 
 
-hC_hDTY::~hC_hDTY()
+hC_hDTY_D::~hC_hDTY_D()
 {
-    qDebug() << "hspdty:: ~ destructor ";
+    qDebug() << "hspdty_D_:: ~ destructor ";
 }
 
 
 
-//void hC_hDTY::debugger(QString num)
+//void hC_hDTY_D::debugger(QString num)
 //{
 //    curIndex = tb_view->table->currentIndex ();
 //    qDebug() << num+num+num

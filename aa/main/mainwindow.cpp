@@ -77,6 +77,9 @@ void MainWindow::createDbase()
     hspdty = new hC_hDTY;
     hspdty->tbsetup ();
 
+    hspdty_D = new hC_hDTY_D;
+    hspdty_D->tbsetup ();
+
 
 }
 
@@ -198,7 +201,8 @@ void MainWindow::createTabs()
         integerLabel->setText (QString::number (mw_currentHesapItem->hesapKod ())) ;
         statusBar()->showMessage(tr("Aktif Hesap"));
         layout->addWidget(hspdty, 0, 0);
-        layout->addWidget(integerLabel, 1, 0);
+        layout->addWidget(hspdty_D, 1, 0);
+        layout->addWidget(integerLabel, 2, 0);
 
         w_TABs->setTabIcon (0,
                  QIcon(":/rsm/ico/plus-minus-green.ico"));
