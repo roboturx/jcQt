@@ -189,9 +189,9 @@ void hC_hDTY::tbkntrl()
     //////////////// filtering
     proxyModel_dty = new hc_hDty_PRXYModel  (this);
     // setting proxyModel_dty to view
-    proxyModel_dty->setSourceModel (tb_model);
+    proxyModel_dty->setSourceModel (tb_model); // proxy için hesap detay baz alındı
 
-    tb_view->table->setModel (proxyModel_dty);
+    tb_view->table->setModel (proxyModel_dty); // view için proxy model
     for (int i = 0; i < proxyModel_dty->columnCount(); ++i)
         tb_view->table->resizeColumnToContents(i);
 
@@ -399,7 +399,8 @@ void hC_hDTY::slt_hesapChanged(HesapItem *currHspItem)
      //      .arg(hc_hsp_currentHesapItem->hesapKod ()) );
    // tb_model->select ();
 
-    qDebug() << "13"
+    qDebug() << "13 hesap değiştiğinde proxy regular exp değişsin "
+             << "pattern hesapkod olduğundan current hesap item kod patterne"
              << QString::number(hc_hsp_currentHesapItem->hesapKod ());
     // filtering proxy model1
 

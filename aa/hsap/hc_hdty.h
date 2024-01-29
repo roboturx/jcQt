@@ -1,11 +1,12 @@
 #ifndef hC_HSPDTY_H
 #define hC_HSPDTY_H
 
-#include "hsap/hc_hdty_filter_wgt.h"
+
 #include "libs/globals.h"
 #include "libs/hc_.h"
 //#include "hc_hsp.h"
 //#include "cls_dlgt_combobox.h"
+#include "hsap/hc_hdty_filter_wgt.h"
 #include "hsap/hc_hdty_prxy_model.h"
 #include "hsap/hesapitem.h"
 namespace nSHsp
@@ -58,8 +59,8 @@ private:
     void tbui    () ;
     void tbkntrl () ;
   //  void debugger(QString num) ;
-    hc_hDty_PRXYModel *proxyModel1;
-    hC_hDty_filter_wgt *filter_wgt ;
+    hc_hDty_PRXYModel *proxyModel_dty;
+    hC_hDty_filter_wgt *filter_wgt_dty ;
 
 protected:
     void showEvent(QShowEvent *);
