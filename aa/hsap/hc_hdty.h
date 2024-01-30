@@ -62,6 +62,9 @@ private:
     hc_hDty_PRXYModel *proxyModel_dty;
     hC_hDty_filter_wgt *filter_wgt_dty ;
 
+signals:
+    void sgnYevmiyeNo (const int sgnYevmiyeNo); //Yevmiye Noyu detay hsap_d için emitle
+
 protected:
     void showEvent(QShowEvent *);
     void closeEvent(QCloseEvent*);

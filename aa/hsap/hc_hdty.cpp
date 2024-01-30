@@ -21,9 +21,9 @@ hC_hDTY::hC_hDTY() : hC_tBcreator ()
 
     /// setvalue  field no, dbf değişkeni, dbfTYPE, view header, viewda görünür
 
-    tb_flds->setValue(0, "f_hspdty_ID", "INTEGER", "hspdty_ID", "0");
+    tb_flds->setValue ( 0, "f_hspdty_hspid", "INTEGER", "hspdty_ID", "0");
     // hesaplar ile hesap detay arası key
-    tb_flds->setValue(1, "f_hspdty_hspID", "INTEGER", "hspdty_HesapID", "0");
+    tb_flds->setValue ( 1, "f_hspdty_id", "INTEGER", "hspdty_HesapID", "0");
     tb_flds->setValue ( 2, "f_hspdty_tarih"   , "TEXT"   , "Tarih" );
     tb_flds->setValue ( 3, "f_hspdty_no"      , "TEXT"   , "Kayıt No" );
     tb_flds->setValue ( 4, "f_hspdty_aciklama", "TEXT"   , "Açıklama");
@@ -189,9 +189,9 @@ void hC_hDTY::tbkntrl()
     //////////////// filtering
     proxyModel_dty = new hc_hDty_PRXYModel  (this);
     // setting proxyModel_dty to view
-    proxyModel_dty->setSourceModel (tb_model);
+    proxyModel_dty->setSourceModel (tb_model); // proxy için hesap detay baz alındı
 
-    tb_view->table->setModel (proxyModel_dty);
+    tb_view->table->setModel (proxyModel_dty); // view için proxy model
     for (int i = 0; i < proxyModel_dty->columnCount(); ++i)
         tb_view->table->resizeColumnToContents(i);
 
@@ -361,6 +361,11 @@ void hC_hDTY::tbkntrl()
         {
             qDebug() <<"index is invalid - tb mappper setCurrentModelIndex";
         }
+        // 011-02 yevmiye defterinde row değiştiğinde yevmiye noyu etrafa yayınlayalım
+        // yevmiye detayları detay dosyasında filtrelensin
+
+        emit sgnYevmiyeNo(tb_view->table->model()->index( Index.row() ,
+         tb_model->fieldIndex ("f_hspdty_id") ).data().toInt()) ;
 
     });
 
@@ -394,12 +399,31 @@ void hC_hDTY::slt_hesapChanged(HesapItem *currHspItem)
     /// hesap değiştiğinde filtre değişsin
     qDebug() << "   0150 hC_hDTY::slt_hesapChanged ";
     hc_hsp_currentHesapItem = currHspItem;
+
+    /// yevmiye no yu bul
+    QModelIndex indx =   tb_view->table->currentIndex();
+    if( indx.row() >= 0 )
+    {
+        //qDebug()<< ": "<< indx.row()+1;
+
+        QString hspdtyID = tb_model->data
+                           (tb_model->index
+                            (indx.row (),
+                             tb_model->fieldIndex ("f_hspdty_id"))).toString ();
+    }
+
+    emit hspdtyID;
+
+
  //   tb_model->setFilter(
   //      QString("f_hspdty_hspID = '%1'")
      //      .arg(hc_hsp_currentHesapItem->hesapKod ()) );
    // tb_model->select ();
 
-    qDebug() << "13"
+
+
+    qDebug() << "13 hesap değiştiğinde proxy regular exp değişsin "
+             << "pattern hesapkod olduğundan current hesap item kod patterne"
              << QString::number(hc_hsp_currentHesapItem->hesapKod ());
     // filtering proxy model1
 

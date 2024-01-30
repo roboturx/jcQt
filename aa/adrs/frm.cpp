@@ -232,7 +232,7 @@ void hC_FRM::tbkntrl()
         tb_mapper->setCurrentModelIndex(Index);
         if (Index.isValid())
         {
-
+            qDebug() <<"index is invalid - tb mappper setCurrentModelIndex";
         }
         // 011-02 firmada row değiştiğinde firma ismini etrafa yayınlayalım
         emit hC_FRM::sgnfirma(tb_view->table->model()->index( Index.row() ,

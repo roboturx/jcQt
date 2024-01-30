@@ -401,7 +401,11 @@ void hC_hDTY_D::slt_hesapChanged(HesapItem *currHspItem)
   //      QString("f_hspdty_hspID = '%1'")
      //      .arg(hc_hsp_currentHesapItem->hesapKod ()) );
    // tb_model->select ();
+    
 
+
+    
+    
     qDebug() << "13_D_"
              << QString::number(hc_hsp_currentHesapItem->hesapKod ());
     // filtering proxy model1
