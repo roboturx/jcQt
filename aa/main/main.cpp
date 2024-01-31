@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 
     //QSize size = qApp->screens()[0]->size();
     //w.resize(size*.6);
-    //   w.resize(size);
+    //w.resize(size);
     ///Ana Ekran ////////////////////////////
     //mainwidget.show ();
     w.show();

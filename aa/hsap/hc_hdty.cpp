@@ -412,7 +412,7 @@ void hC_hDTY::slt_hesapChanged(HesapItem *currHspItem)
                              tb_model->fieldIndex ("f_hspdty_id"))).toString ();
     }
 
-    emit hspdtyID;
+    emit sgnYevmiyeNo (hspdtyID);
 
 
  //   tb_model->setFilter(
@@ -424,7 +424,8 @@ void hC_hDTY::slt_hesapChanged(HesapItem *currHspItem)
 
     qDebug() << "13 hesap değiştiğinde proxy regular exp değişsin "
              << "pattern hesapkod olduğundan current hesap item kod patterne"
-             << QString::number(hc_hsp_currentHesapItem->hesapKod ());
+        << QString::number(hc_hsp_currentHesapItem->hesapKod ());
+            //
     // filtering proxy model1
 
     QString pattern = QString::number(hc_hsp_currentHesapItem->hesapKod ());

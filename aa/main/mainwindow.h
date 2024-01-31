@@ -48,7 +48,8 @@ public:
 
 
 signals:
-    void sgnMwHsp(HesapItem *hCTreeHsp);
+  //  void sgnMwHsp(HesapItem *hCTreeHsp);
+
 
 private slots:
     void print();

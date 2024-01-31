@@ -67,7 +67,8 @@ protected:
 
 public slots:
     //connect selectionmodel change
-    void slt_hesapChanged(HesapItem* currHspItem);
+    void slt_hesapChanged(int *yevmiyeNo);
+    void slt_yevmiye(int *yevmiyeNo);
 };
 
 #endif // hC_HSPDTY_H

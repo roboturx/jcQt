@@ -217,8 +217,8 @@ void hC_hDTY_D::tbkntrl()
         hC_Nr maxID;
         int* max_id = new int{};
         *max_id = maxID.hC_NrMax ( tb_name, tb_flds->value (0,0));
-        if (*max_id==0)
-            *max_id = 10000;
+     //   if (*max_id==0)
+       //     *max_id = 10000;
         ////////////////////////////////////////////////
 
         qDebug() << "  hC_hDTY_D_D_ yeni kayıt KOD :  -- " << *max_id <<" --";
@@ -232,22 +232,23 @@ void hC_hDTY_D::tbkntrl()
         reccount=tb_model->rowCount();
 
         qDebug() << "  hC_hDTY_D_D_ yeni kayıt KOD : 3 ";
-            qDebug() << *tb_name;
-            qDebug() << curIndex;
-            qDebug() << reccount;
-            qDebug() << hc_hsp_currentHesapItem->hesapKod ();
-        qStr = QString("INSERT INTO "+*tb_name +
-                       " ( f_hspdty_d_id) "
-                       " values ( '"+
+            qDebug() << "table name : " <<*tb_name;
+            qDebug() << "cur ind    : " << curIndex;
+            qDebug() << "recc       : " << reccount;
+            qDebug() << " max id    : " <<QString::number (*max_id);
+          //  qDebug() <<"item hesap kod " <<hc_hsp_currentHesapItem->hesapKod ();
+
+            qStr = QString("INSERT INTO "+*tb_name + " ( f_hspdty_d_id/*, f_hspdty_id*/) "
+                  " values ( '"+ QString::number (*max_id)+/*"','"+
                        QString::number (hc_hsp_currentHesapItem->hesapKod ()+
                                        100000 // kod 100000 den başlasın
-                                       )+
+                                       )+*/
                        "' )")  ;
 
         qDebug() << "  hC_hDTY_D_D_ yeni kayıt KOD : 4 ";
         if ( !query.exec(qStr) )
         {
-            mesaj = mesaj + "002x_D_- İlk node e k l e n e m e d i ...\n/n"+
+            mesaj = mesaj + "002x_D_- İlk node e k l e n e m e d i ...\n/n :"+
                     query.lastError().text ();
         }
         else
@@ -382,6 +383,8 @@ void hC_hDTY_D::tbkntrl()
 }
 
 
+
+
 void hC_hDTY_D::showEvent(QShowEvent *)
 {
     qDebug() << "   0140 hspdty_D_::showevent ";
@@ -392,11 +395,19 @@ void hC_hDTY_D::closeEvent(QCloseEvent *)
    qDebug() << "hspdty_D_:: close ()";
 }
 
-void hC_hDTY_D::slt_hesapChanged(HesapItem *currHspItem)
+
+void hC_hDTY_D::slt_yevmiye(int *yevmiyeNo)
+{
+    qDebug() << "heyooo emitted yevm no: " << yevmiyeNo;
+    slt_hesapChanged(yevmiyeNo);
+}
+
+void hC_hDTY_D::slt_hesapChanged(int *yevmiyeNo)
 {
     /// hesap değiştiğinde filtre değişsin
-    qDebug() << "   0150 hC_hDTY_D_D_::slt_hesapChanged ";
-    hc_hsp_currentHesapItem = currHspItem;
+    qDebug() << "   0150 hC_hDTY_D_D_::slt_hesapChanged "
+             << "yevmiye NO = " << yevmiyeNo;
+ //   hc_hsp_currentHesapItem = currHspItem;
  //   tb_model->setFilter(
   //      QString("f_hspdty_hspID = '%1'")
      //      .arg(hc_hsp_currentHesapItem->hesapKod ()) );
@@ -407,10 +418,10 @@ void hC_hDTY_D::slt_hesapChanged(HesapItem *currHspItem)
     
     
     qDebug() << "13_D_"
-             << QString::number(hc_hsp_currentHesapItem->hesapKod ());
+             << yevmiyeNo;
     // filtering proxy model1
 
-    QString pattern = QString::number(hc_hsp_currentHesapItem->hesapKod ());
+    QString pattern = QString::number(*yevmiyeNo);
     pattern = QRegularExpression::escape (pattern);
     QRegularExpression::PatternOptions options =
         QRegularExpression::NoPatternOption
@@ -429,9 +440,6 @@ void hC_hDTY_D::slt_hesapChanged(HesapItem *currHspItem)
         //QString::number(hc_hsp_currentHesapItem->hesapKod ()));
     qDebug() << "_D_131";
     proxyModel1->setFilterKeyColumn(1);
-
-
-
 
 }
 

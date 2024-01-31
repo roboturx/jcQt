@@ -15,7 +15,7 @@
 MainWindow::MainWindow()
 
 {
-    qDebug ()<<"   creat gui,";
+    qDebug ()<<"   creat gui";
     createGui();
     createDbase ();
     //Login();
@@ -35,14 +35,14 @@ void MainWindow::createGui()
     setWindowTitle(tr("Evren v23.01"));
     this->showMaximized();
 
-    w_TABs = new QTabWidget(this);
-    w_TABs->setTabPosition (QTabWidget::North);
+    w_TABs = new QTabWidget(this);                  //  hesap-ayar-yardım
+    w_TABs->setTabPosition (QTabWidget::North);     //  tab isimleri kuzeye
 
-    QWidget *DBFPage = new QWidget;
+    QWidget *DBFPage = new QWidget;                 //  veriyi bir widget içinde göster
     QGridLayout *ayarlayout = new QGridLayout(DBFPage);
 
     ayarlayout->addWidget(w_TABs             ,  0, 0, 15, 2 );
-    ayarlayout->addWidget(new QLabel("TabLAR") , 16, 0, 1, 1 );
+    ayarlayout->addWidget(new QLabel("TabLAR mw den gösterilir") , 16, 0, 1, 1 );
 
     setCentralWidget(DBFPage);
 
@@ -79,6 +79,7 @@ void MainWindow::createDbase()
 
     hspdty_D = new hC_hDTY_D;
     hspdty_D->tbsetup ();
+
 
 
 }
@@ -134,24 +135,29 @@ void MainWindow::createDockWindows()
     addDockWidget(Qt::LeftDockWidgetArea, dock);
     viewMenu->addAction(dock->toggleViewAction());
 
+
+    // hsp tree view de hesap değiştiğinde TABLAR tekrar oluşturulur
     connect(hesapTree, &hsp_Tree_view::sgnHesap, this, &MainWindow::w_Tabs);
 }
 
 void MainWindow::w_Tabs(HesapItem *hesapItem)
 {
+    // connect ed to hesap tree signal
     mw_currentHesapItem = hesapItem;
+    // signal gelmiş TABları tekrar oluştur
     createTabs();
 }
 
 
 void MainWindow::createTabs()
 {
-    qDebug()<< "mw create tabs  //";
+    qDebug()<< " // mw create tabs  //";
     w_TABs->clear ();
     w_TABs->setIconSize(QSize (28,28));
  //   QGridLayout *TABlayout = new QGridLayout(this);
 
     int frameStyle = QFrame::Sunken /*| QFrame::Panel*/;
+
 
     QString h_Turu = mw_currentHesapItem->hesapTuru();
     integerLabel = new QLabel(h_Turu);
@@ -166,34 +172,29 @@ void MainWindow::createTabs()
     ///
     QWidget *hesapPage = new QWidget(this);
     QGridLayout *layout = new QGridLayout(hesapPage);
-    //layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Ignored, QSizePolicy::MinimumExpanding), 5, 0);
-//    layout->setColumnStretch(1, 1);
-//    layout->setColumnMinimumWidth(1, 250);
-//    layout->addWidget(w_TABs, 0, 0);
 
+    // hesap turune gore sayfa oluştur
     w_TABs->addTab(hesapPage, h_Turu);
 
     if (h_Turu == "Konum")
     {
+        statusBar()->showMessage(tr("Konum"));
         layout->addWidget(integerLabel, 1, 0);
-
         w_TABs->setTabIcon (0,QIcon(":/rsm/icon/globe.png"));
     }
     if (h_Turu == "Şirket")
     {
         statusBar()->showMessage(tr("Firma Bilgileri"));
+        // firma objesini widgta ekle
         layout->addWidget(firma, 0, 0);
         layout->addWidget(integerLabel, 1, 0);
-
         w_TABs->setTabIcon (0,QIcon(":/rsm/icon/file.png"));
     }
     if (h_Turu == "Şahıs")
     {
-
         statusBar()->showMessage(tr("Şahıs Adres Bilgileri"));
         layout->addWidget(clsn, 0, 0);
         layout->addWidget(integerLabel, 1, 0);
-
         w_TABs->setTabIcon (0,QIcon(":/rsm/person.jpeg"));
     }
     if (h_Turu == "Aktif Hesap")
@@ -208,6 +209,17 @@ void MainWindow::createTabs()
                  QIcon(":/rsm/ico/plus-minus-green.ico"));
 
         hspdty->slt_hesapChanged (mw_currentHesapItem);
+5855
+        QModelIndex indx =   hspdty->tb_view->table->currentIndex();
+        int *yevmiyeNo{0};
+        if( indx.row() >= 0 )
+        {
+        *yevmiyeNo = hspdty->tb_model->data
+                        (hspdty->tb_model->index
+                         (indx.row (),
+                          hspdty->tb_model->fieldIndex ("f_hspdty_id"))).toInt ();
+        }
+        hspdty_D->slt_hesapChanged(yevmiyeNo);
     }
     if (h_Turu == "Pasif Hesap")
     {
