@@ -105,15 +105,14 @@ adrs/ftr.h
 
 contains(DEFINES, HSAP) {
 
-
 HEADERS += \
 hsap/cm_dlg_cb_htur.h \
 hsap/cm_dlg_le_richtxt.h \
 hsap/cm_dlg_richtxt.h \
 hsap/cw_dlg_options.cpp \
-hsap/hc_hdty_filter_wgt.h \
-hsap/hc_hdty_prxy_model.h \
-hsap/hc_hdty.h \
+    hsap/hc_yevmiye.h \
+    hsap/hc_yevmiye_filter_wgt.h \
+    hsap/hc_yevmiye_prxy_model.h \
     hsap/hsp_add.h \
     hsap/hsp_cb_turu.h \
     hsap/hsp_filter_wgt.h \
@@ -127,9 +126,9 @@ hsap/cm_dlg_cb_htur.cpp \
 hsap/cm_dlg_le_richtxt.cpp \
 hsap/cm_dlg_richtxt.cpp \
 hsap/cw_dlg_options.cpp \
-hsap/hc_hdty_filter_wgt.cpp \
-hsap/hc_hdty_prxy_model.cpp \
-hsap/hc_hdty.cpp \
+    hsap/hc_yevmiye.cpp \
+    hsap/hc_yevmiye_filter_wgt.cpp \
+    hsap/hc_yevmiye_prxy_model.cpp \
     hsap/hsp_add.cpp \
     hsap/hsp_cb_turu.cpp \
     hsap/hsp_filter_wgt.cpp \
@@ -230,18 +229,18 @@ HEADERS += \
     hsap/dlg/dlg_date.h \
     hsap/dlg/dlg_hlist.h \
     hsap/dlg/dlg_r.h \
-    hsap/hc_hdty_d.h \
-    hsap/hc_hdty_d_filter_wgt.h \
-    hsap/hc_hdty_d_prxy_model.h \
+    hsap/hc_yevmiye_d.h \
+    hsap/hc_yevmiye_d_filter_wgt.h \
+    hsap/hc_yevmiye_d_prxy_model.h \
     hsap/hsp_list.h
 
 SOURCES += \
     hsap/dlg/dlg_date.cpp \
     hsap/dlg/dlg_hlist.cpp \
     hsap/dlg/dlg_r.cpp \
-    hsap/hc_hdty_d.cpp \
-    hsap/hc_hdty_d_filter_wgt.cpp \
-    hsap/hc_hdty_d_prxy_model.cpp \
+    hsap/hc_yevmiye_d.cpp \
+    hsap/hc_yevmiye_d_filter_wgt.cpp \
+    hsap/hc_yevmiye_d_prxy_model.cpp \
     hsap/hsp_list.cpp
 
 

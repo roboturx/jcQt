@@ -19,7 +19,7 @@
 
 
 //#include "hsap/hc_hsp.h"
-#include "hsap/hc_hdty.h"
+#include "hsap/hc_yevmiye.h"
 
 #include "mchn/mkn.h"
 #include "mchn/mkn_cinsi.h"
@@ -116,7 +116,7 @@ void DBase::VTDosyaKontrol()
 #endif
 
 #ifdef HSAP
-    hC_hDTY* hspdty = new hC_hDTY;
+    hC_YEVMIYE* hspdty = new hC_YEVMIYE;
     yaz(hspdty->tbCreate (hspdty->tb_flds));
     delete hspdty ;
 #endif

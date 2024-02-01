@@ -1,15 +1,15 @@
-#ifndef HC_HDTY_PRXYMODEL_D_H
-#define HC_HDTY_PRXYMODEL_D_H
+#ifndef HC_YEVMIYE_PRXYMODEL_D_H
+#define HC_YEVMIYE_PRXYMODEL_D_H
 
 #include <QDate>
 #include <QSortFilterProxyModel>
 
-class hC_hDty_D_PRXYModel : public QSortFilterProxyModel
+class hC_YEVMIYE_D_PRXYModel : public QSortFilterProxyModel
     {
         Q_OBJECT
 
     public:
-        explicit hC_hDty_D_PRXYModel(QObject *parent=nullptr);
+        explicit hC_YEVMIYE_D_PRXYModel(QObject *parent=nullptr);
 
         QDate filterMinimumDate() const { return minDate; }
         void setFilterMinimumDate(QDate date);
@@ -28,4 +28,4 @@ class hC_hDty_D_PRXYModel : public QSortFilterProxyModel
         QDate maxDate;
 };
 
-#endif // HC_HDTY_PRXYMODEL_H
+#endif // HC_YEVMIYE_PRXYMODEL_H

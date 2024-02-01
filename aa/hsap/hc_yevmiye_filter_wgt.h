@@ -1,5 +1,5 @@
-#ifndef HC_HDTY_FILTER_WGT_H
-#define HC_HDTY_FILTER_WGT_H
+#ifndef HC_YEVMIYE_FILTER_WGT_H
+#define HC_YEVMIYE_FILTER_WGT_H
 
 #include <QLineEdit>
 
@@ -8,7 +8,7 @@ class QAction;
 class QActionGroup;
 QT_END_NAMESPACE
 
-class hC_hDty_filter_wgt : public QLineEdit
+class hC_YEVMIYE_filter_wgt : public QLineEdit
 {
     Q_OBJECT
     Q_PROPERTY(Qt::CaseSensitivity caseSensitivity READ caseSensitivity
@@ -16,7 +16,7 @@ class hC_hDty_filter_wgt : public QLineEdit
     Q_PROPERTY(PatternSyntax patternSyntax READ patternSyntax
                    WRITE setPatternSyntax)
 public:
-    explicit hC_hDty_filter_wgt(QWidget *parent = nullptr);
+    explicit hC_YEVMIYE_filter_wgt(QWidget *parent = nullptr);
 
     Qt::CaseSensitivity caseSensitivity() const;
     void setCaseSensitivity(Qt::CaseSensitivity);
@@ -40,4 +40,4 @@ private:
 };
 
 
-#endif // HC_HDTY_FILTER_WGT_H
+#endif // HC_YEVMIYE_FILTER_WGT_H

@@ -1,15 +1,15 @@
-#include "hsap/hc_hdty_d_prxy_model.h"
+#include "hsap/hc_yevmiye_d_prxy_model.h"
 #include <QtWidgets>
 
 //! [0]
-hC_hDty_D_PRXYModel::hC_hDty_D_PRXYModel(QObject *parent)
+hC_YEVMIYE_D_PRXYModel::hC_YEVMIYE_D_PRXYModel(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
 }
 //! [0]
 
 //! [1]
-void hC_hDty_D_PRXYModel::setFilterMinimumDate(QDate date)
+void hC_YEVMIYE_D_PRXYModel::setFilterMinimumDate(QDate date)
 {
     minDate = date;
     invalidateFilter();
@@ -17,7 +17,7 @@ void hC_hDty_D_PRXYModel::setFilterMinimumDate(QDate date)
 //! [1]
 
 //! [2]
-void hC_hDty_D_PRXYModel::setFilterMaximumDate(QDate date)
+void hC_YEVMIYE_D_PRXYModel::setFilterMaximumDate(QDate date)
 {
     maxDate = date;
     invalidateFilter();
@@ -25,7 +25,7 @@ void hC_hDty_D_PRXYModel::setFilterMaximumDate(QDate date)
 //! [2]
 
 //! [3]
-bool hC_hDty_D_PRXYModel::filterAcceptsRow(int sourceRow,
+bool hC_YEVMIYE_D_PRXYModel::filterAcceptsRow(int sourceRow,
                                         const QModelIndex &sourceParent) const
 {
     QModelIndex index0 = sourceModel()->index(sourceRow, 0, sourceParent);
@@ -39,7 +39,7 @@ bool hC_hDty_D_PRXYModel::filterAcceptsRow(int sourceRow,
 //! [3]
 
 //! [4] //! [5]
-bool hC_hDty_D_PRXYModel::lessThan(const QModelIndex &left,
+bool hC_YEVMIYE_D_PRXYModel::lessThan(const QModelIndex &left,
                                 const QModelIndex &right) const
 {
     QVariant leftData = sourceModel()->data(left);
@@ -71,7 +71,7 @@ bool hC_hDty_D_PRXYModel::lessThan(const QModelIndex &left,
 //! [5] //! [6]
 
 //! [7]
-bool hC_hDty_D_PRXYModel::dateInRange(QDate date) const
+bool hC_YEVMIYE_D_PRXYModel::dateInRange(QDate date) const
 {
     return (!minDate.isValid() || date > minDate)
            && (!maxDate.isValid() || date < maxDate);

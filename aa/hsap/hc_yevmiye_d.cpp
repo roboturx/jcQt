@@ -1,4 +1,4 @@
-#include "hsap/hC_hDTY_D.h"
+#include "hsap/hc_yevmiye_d.h"
 #include "hsap/cm_dlg_cb_htur.h"
 #include "hsap/dlg/dlg_date.h"
 #include "hsap/dlg/dlg_hlist.h"
@@ -8,34 +8,34 @@
 
 
 
-hC_hDTY_D::hC_hDTY_D() : hC_tBcreator ()
+hC_YEVMIYE_D::hC_YEVMIYE_D() : hC_tBcreator ()
 {
     qDebug ()<<"Constructor HESAP DETAY **************************";
     //************************************************************
     //************  H E S A P  D E T A Y L A R I  ****************
 
     win_Label->setText ( "HESAP GÜNLÜK DEFTER KAYITLARI");
-    *tb_name   = "hspdty_d_dbtb" ;
-    *tb_ndex  = "f_hspdty_d_id";
+    *tb_name   = "yvmye_d_dbtb" ;
+    *tb_ndex  = "f_yvmye_d_id";
     tb_flds = new hC_ArrD (10, 4);
 
     /// setvalue  field no, dbf değişkeni, dbfTYPE, view header, viewda görünür
 
-    tb_flds->setValue(  0, "f_hspdty_id", "INTEGER", "hspdty_ID", "0");
+    tb_flds->setValue(  0, "f_yvmye_d_id", "INTEGER", "YEVMİYE_Detay_ID"/*, "0"*/);
     // hesap detay ile hesap günlük defter detay arası key
-    tb_flds->setValue ( 1, "f_hspdty_d_id"      , "INTEGER", "hspdty_D_ID", "0");
-    tb_flds->setValue ( 2, "f_hspdty_d_tarih"   , "TEXT"   , "Tarih" );
-    tb_flds->setValue ( 3, "f_hspdty_d_no"      , "TEXT"   , "Kayıt No" );
-    tb_flds->setValue ( 4, "f_hspdty_d_aciklama", "TEXT"   , "Açıklama");
-    tb_flds->setValue ( 5, "f_hspdty_d_transfer", "TEXT"   , "İlgili Hesap");
-    tb_flds->setValue ( 6, "f_hspdty_d_r"       , "TEXT"   , "R");
-    tb_flds->setValue ( 7, "f_hspdty_d_borc"    , "TEXT"   , "BORC");
-    tb_flds->setValue ( 8, "f_hspdty_d_alacak"  , "TEXT"   , "ALACAK");
-    tb_flds->setValue ( 9, "f_hspdty_d_resim"   , "BLOB"   , "Resim","0");
+    tb_flds->setValue ( 1, "f_yvmye_id"      , "INTEGER", "YEVMİYE_ID"/*, "0"*/);
+    tb_flds->setValue ( 2, "f_yvmye_d_tarih"   , "TEXT"   , "Tarih" );
+    tb_flds->setValue ( 3, "f_yvmye_d_no"      , "TEXT"   , "Kayıt No" );
+    tb_flds->setValue ( 4, "f_yvmye_d_aciklama", "TEXT"   , "Açıklama");
+    tb_flds->setValue ( 5, "f_yvmye_d_transfer", "TEXT"   , "İlgili Hesap");
+    tb_flds->setValue ( 6, "f_yvmye_d_r"       , "TEXT"   , "R");
+    tb_flds->setValue ( 7, "f_yvmye_d_borc"    , "TEXT"   , "BORC");
+    tb_flds->setValue ( 8, "f_yvmye_d_alacak"  , "TEXT"   , "ALACAK");
+    tb_flds->setValue ( 9, "f_yvmye_d_resim"   , "BLOB"   , "Resim","0");
 
     tb_wdgts = new QList <QWidget*> ;
 
-    tb_wdgts->append ( lE_hspdtyID  = new QLineEdit   ) ; //  id
+    tb_wdgts->append ( lE_yvmyeID  = new QLineEdit   ) ; //  id
     tb_wdgts->append ( lE_hspID  = new QLineEdit   ) ; // parent id
     tb_wdgts->append ( dE_tarih = new QDateEdit   ) ;
     tb_wdgts->append ( lE_no  = new QLineEdit   ) ;
@@ -53,9 +53,9 @@ hC_hDTY_D::hC_hDTY_D() : hC_tBcreator ()
 }
 
 
-void hC_hDTY_D::tbsetup()
+void hC_YEVMIYE_D::tbsetup()
 {
-    qDebug() << "0100 hspdty_D_::tbsetup ------------------------- begins";
+    qDebug() << "0100 yvmye_D_::tbsetup ------------------------- begins";
     tbCreate ( tb_flds );
     tbModel  ( tb_flds );
     tbView   ( tb_flds );
@@ -64,13 +64,13 @@ void hC_hDTY_D::tbsetup()
     tbwdgt  ();
     tbui();
     tbkntrl ();
-    qDebug() << "0100 hspdty_D_::tbsetup ------------------------- end";
+    qDebug() << "0100 yvmye_D_::tbsetup ------------------------- end";
 }
 
 
-void hC_hDTY_D::tbwdgt()
+void hC_YEVMIYE_D::tbwdgt()
 {
-    qDebug() << "   0110 hspdty_D_::tbwdgt ---- begin";
+    qDebug() << "   0110 yvmye_D_::tbwdgt ---- begin";
 
 
 
@@ -143,16 +143,16 @@ void hC_hDTY_D::tbwdgt()
 
     //  xx2=1;
     win_Grid->addWidget(win_Rsm       , 7, 4, 3, 2);
-    qDebug() << "   0110 hspdty_D_::wdgt ---- end";
+    qDebug() << "   0110 yvmye_D_::wdgt ---- end";
 }
 
 
-void hC_hDTY_D::tbui()
+void hC_YEVMIYE_D::tbui()
 {
 
-    qDebug() << "   0120 hspdty_D_::tbui ---- begins";
+    qDebug() << "   0120 yvmye_D_::tbui ---- begins";
 
-    hC_hDTY_D::setWindowTitle (win_Label->text ());
+    hC_YEVMIYE_D::setWindowTitle (win_Label->text ());
     this->setGeometry (20,20,1200,600);
 
     QSplitter *splitter = new QSplitter(this);
@@ -167,15 +167,15 @@ void hC_hDTY_D::tbui()
     win_grid->addWidget (splitter  , 0, 0, 1, 1);
     // win_grid->addWidget (win_Wdgt   , 0, 1, 1, 1);
     // win_grid->addWidget (win_hC_hsp   , 0, 0, 2, 1);
-    qDebug() << "   0120 hspdty_D_::tbui ---- end";
+    qDebug() << "   0120 yvmye_D_::tbui ---- end";
 }
 
 
 
 
-void hC_hDTY_D::tbkntrl()
+void hC_YEVMIYE_D::tbkntrl()
 {
-    qDebug() << "   0130 hspdty_D_::tbkntrl ---- begin";
+    qDebug() << "   0130 yvmye_D_::tbkntrl ---- begin";
 
     dlg_Date *clndr = new dlg_Date;
     dlg_R *cb_R = new dlg_R();
@@ -187,7 +187,7 @@ void hC_hDTY_D::tbkntrl()
     tb_view->table->setItemDelegateForColumn(6, cb_R);
 
     //////////////// filtering
-    proxyModel1 = new hC_hDty_D_PRXYModel  (this);
+    proxyModel1 = new hC_YEVMIYE_D_PRXYModel  (this);
     // setting proxymodel1 to view
     proxyModel1->setSourceModel (tb_model);
 
@@ -217,35 +217,37 @@ void hC_hDTY_D::tbkntrl()
         hC_Nr maxID;
         int* max_id = new int{};
         *max_id = maxID.hC_NrMax ( tb_name, tb_flds->value (0,0));
-     //   if (*max_id==0)
-       //     *max_id = 10000;
+        if (*max_id==1)
+            *max_id = 500;
         ////////////////////////////////////////////////
 
-        qDebug() << "  hC_hDTY_D_D_ yeni kayıt KOD :  -- " << *max_id <<" --";
+        qDebug() << "  hC_YEVMIYE_D_D_ yeni kayıt KOD :  -- " << *max_id <<" --";
 
-        QSqlQuery query;
-        QString qStr, mesaj("");
+         QSqlQuery query;
+         QString qStr, mesaj("");
 
-        qDebug() << "  hC_hDTY_D_D_ yeni kayıt KOD : 2 ";
 
-        curIndex = tb_view->table->currentIndex ();
-        reccount=tb_model->rowCount();
+       //  curIndex = tb_view->table->currentIndex ();
+       //  reccount=tb_model->rowCount();
 
-        qDebug() << "  hC_hDTY_D_D_ yeni kayıt KOD : 3 ";
-            qDebug() << "table name : " <<*tb_name;
-            qDebug() << "cur ind    : " << curIndex;
-            qDebug() << "recc       : " << reccount;
-            qDebug() << " max id    : " <<QString::number (*max_id);
-          //  qDebug() <<"item hesap kod " <<hc_hsp_currentHesapItem->hesapKod ();
+       //  qDebug() << "  hC_YEVMIYE_D_D_ yeni kayıt KOD : 3 ";
+       //      qDebug() << "table name : " <<*tb_name;
+       //      qDebug() << "cur ind    : " << curIndex;
+       //      qDebug() << "recc       : " << reccount;
+       //      qDebug() << " max id    : " <<QString::number (*max_id);
+       //    //  qDebug() <<"item hesap kod " <<hc_hsp_currentHesapItem->hesapKod ();
 
-            qStr = QString("INSERT INTO "+*tb_name + " ( f_hspdty_d_id/*, f_hspdty_id*/) "
-                  " values ( '"+ QString::number (*max_id)+/*"','"+
-                       QString::number (hc_hsp_currentHesapItem->hesapKod ()+
-                                       100000 // kod 100000 den başlasın
-                                       )+*/
+            qStr = QString("INSERT INTO "
+                           +*tb_name
+                           + " ( f_yvmye_d_id ) " ///*, f_yvmye_id*/
+                             " values ( '"
+                           + QString::number (*max_id)
+                           + /*"','"
+                           + QString::number (hc_hsp_currentHesapItem->hesapKod ()
+                           + 100000 // kod 100000 den başlasın )+*/
                        "' )")  ;
 
-        qDebug() << "  hC_hDTY_D_D_ yeni kayıt KOD : 4 ";
+        qDebug() << "  hC_YEVMIYE_D_D_ yeni kayıt KOD :  ";
         if ( !query.exec(qStr) )
         {
             mesaj = mesaj + "002x_D_- İlk node e k l e n e m e d i ...\n/n :"+
@@ -287,7 +289,7 @@ void hC_hDTY_D::tbkntrl()
                      "resim", "ekle");
     });
 
-    // -- 003   hspdty  değiştiğnde resmide değiştirelim
+    // -- 003   yvmye  değiştiğnde resmide değiştirelim
     connect(  tbx_slctnMdl , &QItemSelectionModel::currentRowChanged,
               this, [this]()
     {
@@ -312,20 +314,20 @@ void hC_hDTY_D::tbkntrl()
             //         tb_view->table->selectionModel()->setCurrentIndex
             //             (sample,QItemSelectionModel::NoUpdate);
 
-            QString hspdtyID = tb_model->data
+            QString yvmyeID = tb_model->data
                     (tb_model->index
                      (indx.row (),
-                      tb_model->fieldIndex ("f_hspdty_d_id"))).toString ();
+                      tb_model->fieldIndex ("f_yvmye_d_id"))).toString ();
 
             QString hesapad = tb_model->data
                     (tb_model->index
                      (indx.row (),
-                      tb_model->fieldIndex ("f_hspdty_d_ad"))).toString ();
+                      tb_model->fieldIndex ("f_yvmye_d_ad"))).toString ();
 
 
             QMessageBox::StandardButton dlg;
             dlg = QMessageBox::question(this,
-                                        "KAYIT SİL", hspdtyID+" - "+hesapad ,
+                                        "KAYIT SİL", yvmyeID+" - "+hesapad ,
                                         QMessageBox::Yes | QMessageBox::No);
 
             if(dlg == QMessageBox::Yes)
@@ -379,37 +381,40 @@ void hC_hDTY_D::tbkntrl()
     });
 
 
-    qDebug() << "   0130 hspdty_D_::tbkntrl ---- end";
+    qDebug() << "   0130 yvmye_D_::tbkntrl ---- end";
 }
 
 
 
 
-void hC_hDTY_D::showEvent(QShowEvent *)
+void hC_YEVMIYE_D::showEvent(QShowEvent *)
 {
-    qDebug() << "   0140 hspdty_D_::showevent ";
+    qDebug() << "   0140 yvmye_D_::showevent ";
 }
 
-void hC_hDTY_D::closeEvent(QCloseEvent *)
+void hC_YEVMIYE_D::closeEvent(QCloseEvent *)
 {
-   qDebug() << "hspdty_D_:: close ()";
+   qDebug() << "yvmye_D_:: close ()";
 }
 
-
-void hC_hDTY_D::slt_yevmiye(int *yevmiyeNo)
+void hC_YEVMIYE_D::slt_yevmiye(qint64 yevmiyeNo)
 {
     qDebug() << "heyooo emitted yevm no: " << yevmiyeNo;
-    slt_hesapChanged(yevmiyeNo);
+    SGNDyevmiyeNo = &yevmiyeNo;
+    slt_yevmiyeHesapChanged();
+
 }
 
-void hC_hDTY_D::slt_hesapChanged(int *yevmiyeNo)
+void hC_YEVMIYE_D::slt_yevmiyeHesapChanged()
 {
+
+
     /// hesap değiştiğinde filtre değişsin
-    qDebug() << "   0150 hC_hDTY_D_D_::slt_hesapChanged "
-             << "yevmiye NO = " << yevmiyeNo;
+    qDebug() << "   0150 hC_YEVMIYE_D_D_::slt_hesapChanged "
+             << "yevmiye NO = " << SGNDyevmiyeNo;
  //   hc_hsp_currentHesapItem = currHspItem;
  //   tb_model->setFilter(
-  //      QString("f_hspdty_hspID = '%1'")
+  //      QString("f_yvmye_hspID = '%1'")
      //      .arg(hc_hsp_currentHesapItem->hesapKod ()) );
    // tb_model->select ();
     
@@ -418,10 +423,10 @@ void hC_hDTY_D::slt_hesapChanged(int *yevmiyeNo)
     
     
     qDebug() << "13_D_"
-             << yevmiyeNo;
+             << SGNDyevmiyeNo;
     // filtering proxy model1
 
-    QString pattern = QString::number(*yevmiyeNo);
+    QString pattern = QString::number(*SGNDyevmiyeNo);
     pattern = QRegularExpression::escape (pattern);
     QRegularExpression::PatternOptions options =
         QRegularExpression::NoPatternOption
@@ -445,28 +450,28 @@ void hC_hDTY_D::slt_hesapChanged(int *yevmiyeNo)
 
 
 
-hC_hDTY_D::~hC_hDTY_D()
+hC_YEVMIYE_D::~hC_YEVMIYE_D()
 {
-    qDebug() << "hspdty_D_:: ~ destructor ";
+    qDebug() << "yvmye_D_:: ~ destructor ";
 }
 
 
 
-//void hC_hDTY_D::debugger(QString num)
+//void hC_YEVMIYE_D::debugger(QString num)
 //{
 //    curIndex = tb_view->table->currentIndex ();
 //    qDebug() << num+num+num
 //             << " rCnt =" <<  tb_model->rowCount()
 //             << "  r:" << tb_view->table->rowAt(0)
 //             << "  id:"<< tb_model->data(tb_model->index(curIndex.row (),
-//                                                         tb_model->fieldIndex ("hspdty_id")),Qt::DisplayRole).toString()
+//                                                         tb_model->fieldIndex ("yvmye_id")),Qt::DisplayRole).toString()
 //             << "  pid:"<<  tb_model->data(tb_model->index(curIndex.row (),
-//                                                           tb_model->fieldIndex ("hspdty_parentid")),Qt::DisplayRole).toString()
+//                                                           tb_model->fieldIndex ("yvmye_parentid")),Qt::DisplayRole).toString()
 //             << "  ad:"<<  tb_model->data(tb_model->index(curIndex.row (),
-//                                                          tb_model->fieldIndex ("hspdty_ad")),Qt::DisplayRole).toString()
+//                                                          tb_model->fieldIndex ("yvmye_ad")),Qt::DisplayRole).toString()
 //             << "  lft:"<<  tb_model->data(tb_model->index(curIndex.row (),
-//                                                           tb_model->fieldIndex ("hspdty_lft")),Qt::DisplayRole).toString()
+//                                                           tb_model->fieldIndex ("yvmye_lft")),Qt::DisplayRole).toString()
 //             << "  rgt:"<<  tb_model->data(tb_model->index(curIndex.row (),
-//                                                           tb_model->fieldIndex ("hspdty_rgt")),Qt::DisplayRole).toString()
+//                                                           tb_model->fieldIndex ("yvmye_rgt")),Qt::DisplayRole).toString()
 //             <<"  *-*\n"   ;
 //}
