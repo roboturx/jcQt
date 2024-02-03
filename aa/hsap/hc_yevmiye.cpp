@@ -208,6 +208,7 @@ void hC_YEVMIYE::tbkntrl()
     connect(tb_view->pB_ekle, &QPushButton::clicked , this,
             [this]()
     {
+
         ////////////////////////////////////////////////
         /// \brief maxID
         ///
@@ -372,9 +373,14 @@ void hC_YEVMIYE::tbkntrl()
         // 011-02 yevmiye defterinde row değiştiğinde yevmiye noyu etrafa yayınlayalım
         // yevmiye detayları detay dosyasında filtrelensin
 
+        qDebug() << "yevm:: *-- 376 --* : heyooo emitting yevm no: " << tb_view->table->model()->index( Index.row() ,
+                                         tb_model->fieldIndex ("f_yvmye_id") ).data().toInt();
+
         emit sgnYevmiyeNo(tb_view->table->model()->index( Index.row() ,
          tb_model->fieldIndex ("f_yvmye_id") ).data().toInt()) ;
 
+        qDebug() << "yevm:: *-- 380 --* : heyooo emitted yevm no: " << tb_view->table->model()->index( Index.row() ,
+                     tb_model->fieldIndex ("f_yvmye_id") ).data().toInt();
     });
 
     // --- 012 kolon değiştiğinde indexte değişsin
@@ -405,7 +411,8 @@ void hC_YEVMIYE::closeEvent(QCloseEvent *)
 void hC_YEVMIYE::slt_hesapChanged(HesapItem *currHspItem)
 {
     /// hesap değiştiğinde filtre değişsin
-    qDebug() << "   0150 hC_YEVMIYE::slt_hesapChanged *******************************";
+    qDebug() << "   0150 hC_YEVMIYE::slt_hesapChanged ******************************* x x x x x x x x "
+             << currHspItem;
     hc_hsp_currentHesapItem = currHspItem;
 
     /// yevmiye no yu bul
@@ -418,8 +425,9 @@ void hC_YEVMIYE::slt_hesapChanged(HesapItem *currHspItem)
         yvmye_ID = tb_model->data(tb_model->index(indx.row (),
                    tb_model->fieldIndex ("f_yvmye_id"))).toInt ();
     }
-
+    qDebug() << "yevm:: *-- 426 --* : heyooo emitting yevm no: " << yvmye_ID;
     emit sgnYevmiyeNo (yvmye_ID);
+    qDebug() << "yevm:: *-- 426 --* : emitted yevm no: " << yvmye_ID;
 
 
  //   tb_model->setFilter(

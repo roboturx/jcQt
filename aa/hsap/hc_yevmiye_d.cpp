@@ -399,7 +399,7 @@ void hC_YEVMIYE_D::closeEvent(QCloseEvent *)
 
 void hC_YEVMIYE_D::slt_yevmiye(qint64 yevmiyeNo)
 {
-    qDebug() << "heyooo emitted yevm no: " << yevmiyeNo;
+    qDebug() << "yevm_D :: *-- 402 --* slt_yevm :  heyooo emitted yevm no: " << yevmiyeNo;
     SGNDyevmiyeNo = &yevmiyeNo;
     slt_yevmiyeHesapChanged();
 
@@ -410,20 +410,13 @@ void hC_YEVMIYE_D::slt_yevmiyeHesapChanged()
 
 
     /// hesap değiştiğinde filtre değişsin
-    qDebug() << "   0150 hC_YEVMIYE_D_D_::slt_hesapChanged "
-             << "yevmiye NO = " << SGNDyevmiyeNo;
+    qDebug() << "yevm_D :: *-- 414 --* slt_yevmhesapChanged yevmNO= " << *SGNDyevmiyeNo;
  //   hc_hsp_currentHesapItem = currHspItem;
  //   tb_model->setFilter(
   //      QString("f_yvmye_hspID = '%1'")
      //      .arg(hc_hsp_currentHesapItem->hesapKod ()) );
    // tb_model->select ();
-    
 
-
-    
-    
-    qDebug() << "13_D_"
-             << SGNDyevmiyeNo;
     // filtering proxy model1
 
     QString pattern = QString::number(*SGNDyevmiyeNo);

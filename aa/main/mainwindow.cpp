@@ -179,7 +179,7 @@ void MainWindow::createTabs()
         w_TABs->setTabIcon(0, QIcon(":/rsm/person.jpeg"));
     }
     if (h_Turu == "Aktif Hesap" || h_Turu == "Pasif Hesap") {
-        // yevmiye->slt_hesapChanged(mw_currentHesapItem);
+        yevmiye->slt_hesapChanged(mw_currentHesapItem);
         // QModelIndex indx = yevmiye->tb_view->table->currentIndex();
         // int yevmiyeNo;
         // if (indx.row() >= 0) {
