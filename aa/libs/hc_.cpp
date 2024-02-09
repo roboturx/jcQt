@@ -423,7 +423,7 @@ hC_tBcreator::hC_tBcreator (QWidget *parent)
                  <<endl<<"   View  : "<< tb_view
                  <<endl<<"   Map   : "<< tb_mapper ;
 */
-    qDebug () <<"\ntbCreator Construction ...";
+    qDebug () <<"tbCreator Construction ...";
 }
 
 hC_tBcreator::~hC_tBcreator()

@@ -376,12 +376,10 @@ void hC_YEVMIYE_D::tbkntrl()
               [this]( QModelIndex Index )
     {
         tb_mapper->setCurrentModelIndex(Index);
-
-
     });
 
 
-    qDebug() << "   0130 yvmye_D_::tbkntrl ---- end";
+    qDebug() << "yvmye_D_  :: tbkntrl ---- end";
 }
 
 
@@ -389,17 +387,17 @@ void hC_YEVMIYE_D::tbkntrl()
 
 void hC_YEVMIYE_D::showEvent(QShowEvent *)
 {
-    qDebug() << "   0140 yvmye_D_::showevent ";
+    qDebug() << "yvmye_D_  :: showevent ";
 }
 
 void hC_YEVMIYE_D::closeEvent(QCloseEvent *)
 {
-   qDebug() << "yvmye_D_:: close ()";
+   qDebug() << "yvmye_D_  :: close ()";
 }
 
 void hC_YEVMIYE_D::slt_yevmiye(qint64 yevmiyeNo)
 {
-    qDebug() << "yevm_D :: *-- 402 --* slt_yevm :  heyooo emitted yevm no: " << yevmiyeNo;
+    qDebug() << "yevm_D_   :: slt_yevmiye :  heyooo emitted yevm no: " << yevmiyeNo;
     SGNDyevmiyeNo = &yevmiyeNo;
     slt_yevmiyeHesapChanged();
 

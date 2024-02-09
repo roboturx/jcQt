@@ -179,21 +179,13 @@ void MainWindow::createTabs()
         w_TABs->setTabIcon(0, QIcon(":/rsm/person.jpeg"));
     }
     if (h_Turu == "Aktif Hesap" || h_Turu == "Pasif Hesap") {
-        yevmiye->slt_hesapChanged(mw_currentHesapItem);
-        // QModelIndex indx = yevmiye->tb_view->table->currentIndex();
-        // int yevmiyeNo;
-        // if (indx.row() >= 0) {
-        //     yevmiyeNo = yevmiye->tb_model->data(yevmiye->tb_model->index(indx.row(),
-        //                 yevmiye->tb_model->fieldIndex("f_hspdty_id"))).toInt();
 
-        //     int* i = new int ;
-        //     *i=1;
-        //     yevmiye_D->slt_yevmiyeHesapChanged();
+        qDebug()<< "mw        :: createtabs : aktif-pasif send HESAP ITEM to yevm::slt_hesapchanged";
+        yevmiye->slt_hesapChanged(mw_currentHesapItem);
 
         if (h_Turu == "Aktif Hesap") {
             integerLabel->setText(
-                "Aktif: " + QString::number(mw_currentHesapItem->hesapKod()) + " --- hesapid: "
-                /*+ QString::number()*/);
+                "Aktif hesap ID: " + QString::number(mw_currentHesapItem->hesapKod()));
             statusBar()->showMessage(tr("Aktif Hesap"));
             layout->addWidget(yevmiye, 0, 0);
             layout->addWidget(yevmiye_D, 1, 0);
@@ -202,7 +194,8 @@ void MainWindow::createTabs()
         }
 
         if (h_Turu == "Pasif Hesap") {
-            integerLabel->setText(QString::number(mw_currentHesapItem->hesapKod()));
+            integerLabel->setText(
+                "Pasif hesap ID: " + QString::number(mw_currentHesapItem->hesapKod()));
             statusBar()->showMessage(tr("Pasif Hesap"));
             layout->addWidget(yevmiye, 0, 0);
             layout->addWidget(integerLabel, 1, 0);

@@ -62,6 +62,7 @@ void hC_YEVMIYE::tbsetup()
     tbView   ( tb_flds );
     tbMap    ( tb_flds, tb_wdgts );
 
+
     tbwdgt  ();
     tbui();
     tbkntrl ();
@@ -72,11 +73,7 @@ void hC_YEVMIYE::tbsetup()
 void hC_YEVMIYE::tbwdgt()
 {
     qDebug() << "   0110 yvmye::tbwdgt ---- begin";
-
-
-
     //cls_mdl_TreeFromXml:: den hesap listesi gelecek
-
 
     auto *lB_tarih  = new QLabel("Açılış Tarihi"        );
     //  dE_tarih->setPlaceholderText ("Tarih");
@@ -196,6 +193,10 @@ void hC_YEVMIYE::tbkntrl()
     for (int i = 0; i < proxyModel_dty->columnCount(); ++i)
         tb_view->table->resizeColumnToContents(i);
 
+    /// selection model hc_ içinde ayarlanıyor ama
+    /// burada proxy model yeni tanımlandığı için tekrar select ediliyor
+
+    tbx_slctnMdl = tb_view->table->selectionModel ();
     // sorting proxy model1
     //tb_view->table->setSortingEnabled (true);
 
@@ -203,6 +204,8 @@ void hC_YEVMIYE::tbkntrl()
 
     //////////////// filtering end
     tb_view->table->setFocus();
+
+
 
     // pB 001 yeni ekle
     connect(tb_view->pB_ekle, &QPushButton::clicked , this,
@@ -224,21 +227,13 @@ void hC_YEVMIYE::tbkntrl()
         ////////////////////////////////////////////////
 
 
-        qDebug() << "  hc_YEVMIYE yeni kayıt KOD : "
-                 << *max_id
+        qDebug() << "yevm      :: pb_ekle : yeni kayıt maxid : " << *max_id
+                 << " hesap kod : "
                  << QString::number (hc_hsp_currentHesapItem->hesapKod ());
 
         QSqlQuery query;
         QString qStr, mesaj("");
 
-       // curIndex = tb_view->table->currentIndex ();
-        //reccount=tb_model->rowCount();
-
-       // qDebug() << *tb_name;
-       // qDebug() << curIndex;
-       // qDebug() << reccount;
-       // qDebug() << hc_hsp_currentHesapItem->hesapKod ();
-        qDebug() << "  hc_YEVMIYE yeni kayıt KOD xxxx  ";
         qStr = QString("INSERT INTO "
                        + *tb_name
                        + " ( f_yvmye_hspid, f_yvmye_id) values ( '"
@@ -250,7 +245,6 @@ void hC_YEVMIYE::tbkntrl()
                        + QString::number (*max_id)
                        + "' )")  ;
 
-        qDebug() << "  hc_YEVMIYE yeni kayıt KOD : ";
         if ( !query.exec(qStr) )
         {
             mesaj = mesaj + "002x- İlk node e k l e n e m e d i .x.X.x:  "+
@@ -275,10 +269,10 @@ void hC_YEVMIYE::tbkntrl()
         }
         else
         {
-            mesaj = mesaj + " Yevmiye ana kaydı e k l e n e m e d i ."  ;
+            mesaj = mesaj +" Yevmiye ana kaydı e k l e n e m e d i ."  ;
         }
             tb_view->table->setFocus();
-        qDebug()<<mesaj ;
+        qDebug() << mesaj ;
 
     });// connect ekle sonu
 
@@ -303,7 +297,6 @@ void hC_YEVMIYE::tbkntrl()
 
     // pB 004 yeni camera resim ekle
 
-
     // pB 005 sil
 
     connect(tb_view->pB_sil, &QPushButton::clicked, this,
@@ -317,9 +310,11 @@ void hC_YEVMIYE::tbkntrl()
             //         tb_view->table->selectionModel()->setCurrentIndex
             //             (sample,QItemSelectionModel::NoUpdate);
 
-            QString yvmyeID = tb_model->data
-                    (tb_model->index
-                     (indx.row (),
+            QString yvmyeID =
+               // proxyModel_dty->data(proxyModel_dty->index(indx.row (),
+                 //proxyModel_dty->fieldIndex ("yvmye_ID"))).toString ();
+
+                tb_model->data(tb_model->index(indx.row (),
                       tb_model->fieldIndex ("yvmye_ID"))).toString ();
 
             QString hesapad = tb_model->data
@@ -364,23 +359,23 @@ void hC_YEVMIYE::tbkntrl()
     connect(  tbx_slctnMdl , &QItemSelectionModel::currentRowChanged,
               this, [this]( QModelIndex Index )
     {
+        qDebug() <<"yevm      :: connect selectionmodel-RowChanged :- " ;
         // 011-01 mapper indexi ayarla
         tb_mapper->setCurrentModelIndex(Index);
         if (!Index.isValid())
         {
-            qDebug() <<"index is invalid - tb mappper setCurrentModelIndex";
+            qDebug() <<" ! ? ! index is invalid - tb mappper setCurrentModelIndex";
         }
         // 011-02 yevmiye defterinde row değiştiğinde yevmiye noyu etrafa yayınlayalım
         // yevmiye detayları detay dosyasında filtrelensin
 
-        qDebug() << "yevm:: *-- 376 --* : heyooo emitting yevm no: " << tb_view->table->model()->index( Index.row() ,
-                                         tb_model->fieldIndex ("f_yvmye_id") ).data().toInt();
-
-        emit sgnYevmiyeNo(tb_view->table->model()->index( Index.row() ,
-         tb_model->fieldIndex ("f_yvmye_id") ).data().toInt()) ;
-
-        qDebug() << "yevm:: *-- 380 --* : heyooo emitted yevm no: " << tb_view->table->model()->index( Index.row() ,
-                     tb_model->fieldIndex ("f_yvmye_id") ).data().toInt();
+        int yNo=tb_view->table->model()->index( Index.row()
+              ,tb_model->fieldIndex ("f_yvmye_id") ).data().toInt();
+        int hNo=tb_view->table->model()->index( Index.row()
+               ,tb_model->fieldIndex ("f_yvmye_hspid") ).data().toInt();
+        qDebug() << "yevm      :: connect selectionmodel-RowChanged : "
+                    "heyooo emitting yevm no: " << yNo <<" hspNo:" << hNo;
+        emit sgnYevmiyeNo(yNo) ;
     });
 
     // --- 012 kolon değiştiğinde indexte değişsin
@@ -389,109 +384,62 @@ void hC_YEVMIYE::tbkntrl()
               [this]( QModelIndex Index )
     {
         tb_mapper->setCurrentModelIndex(Index);
-
-
     });
 
 
-    qDebug() << "   0130 yvmye::tbkntrl ---- end";
+    qDebug() << "yvmye     ::tbkntrl ---- end";
 }
 
 
 void hC_YEVMIYE::showEvent(QShowEvent *)
 {
-    qDebug() << "   0140 yvmye::showevent ";
+    qDebug() << "yvmye     :: showevent ";
 }
 
 void hC_YEVMIYE::closeEvent(QCloseEvent *)
 {
-   qDebug() << "yvmye:: close ()";
+   qDebug() << "yvmye     :: close ()";
 }
 
 void hC_YEVMIYE::slt_hesapChanged(HesapItem *currHspItem)
 {
     /// hesap değiştiğinde filtre değişsin
-    qDebug() << "   0150 hC_YEVMIYE::slt_hesapChanged ******************************* x x x x x x x x "
-             << currHspItem;
+    qDebug() << "yevm      :: slt_hesapChanged : aktif-pasifden : get CURRHESPITEM ad: "  << currHspItem->hesapKod();
     hc_hsp_currentHesapItem = currHspItem;
 
     /// yevmiye no yu bul
-    QModelIndex indx =   tb_view->table->currentIndex();
+    ///
+    //QModelIndex indx =   tb_view->table->currentIndex();
+    QModelIndex indx =   proxyModel_dty->index(0,0);
     qint64 yvmye_ID {};
+    //qDebug()<< "index r0w-: "<< indx.row()<<"   --- index  ****** "<< indx;
     if( indx.row() >= 0 )
     {
-        //qDebug()<< ": "<< indx.row()+1;
-
-        yvmye_ID = tb_model->data(tb_model->index(indx.row (),
-                   tb_model->fieldIndex ("f_yvmye_id"))).toInt ();
+        yvmye_ID = proxyModel_dty->data(indx).toInt() ;
+        qDebug()<< "yevm      :: slt_hesapChanged : aktif-pasifden : index r0w-: " <<indx.row() <<" emitting yevm_ID : "<< yvmye_ID;
     }
-    qDebug() << "yevm:: *-- 426 --* : heyooo emitting yevm no: " << yvmye_ID;
     emit sgnYevmiyeNo (yvmye_ID);
-    qDebug() << "yevm:: *-- 426 --* : emitted yevm no: " << yvmye_ID;
+    qDebug() << "yevm      :: slt_hesapChanged : aktif-pasifden : emitted yevm ID: " << yvmye_ID;
 
-
- //   tb_model->setFilter(
-  //      QString("f_yvmye_hspID = '%1'")
-     //      .arg(hc_hsp_currentHesapItem->hesapKod ()) );
-   // tb_model->select ();
-
-
-
-    qDebug() << "13 hesap değiştiğinde proxy regular exp değişsin "
-             << "pattern hesapkod olduğundan current hesap item kod patterne"
+    qDebug() << "yevm      :: slt_hesapChanged : aktif-pasifden : hesap değiştiğinde "
+                "proxy regular exp değişsin "
         << QString::number(hc_hsp_currentHesapItem->hesapKod ());
             //
     // filtering proxy model1
-
-    QString pattern = QString::number(hc_hsp_currentHesapItem->hesapKod ());
-    pattern = QRegularExpression::escape (pattern);
     QRegularExpression::PatternOptions options =
         QRegularExpression::NoPatternOption
         | QRegularExpression::CaseInsensitiveOption;
+
+    QString pattern = QString::number(hc_hsp_currentHesapItem->hesapKod ());
+    pattern = QRegularExpression::escape (pattern);
+
     QRegularExpression regularExpression(pattern, options);
     proxyModel_dty->setFilterRegularExpression(regularExpression);
-
-    //QRegularExpression arananIfade("[0-9]");
-    //QRegularExpressionMatch match = arananIfade.match (hc_hsp_currentHesapItem->hesapKod ());
-
-//    qint64 xxx = hc_hsp_currentHesapItem->hesapKod ();
-//    QString xx = QString::number (xxx);
-
-    //proxyModel_dty->setFilterRegularExpression("[0-9]");
-    //proxyModel->setFilterFixedString ("[0-9]");
-        //QString::number(hc_hsp_currentHesapItem->hesapKod ()));
-    qDebug() << "131";
     proxyModel_dty->setFilterKeyColumn(1);
 
-
-
-
 }
-
-
 
 hC_YEVMIYE::~hC_YEVMIYE()
 {
-    qDebug() << "yvmye:: ~ destructor ";
+    qDebug() << "yvmye    :: ~ destructor ";
 }
-
-
-
-//void hC_YEVMIYE::debugger(QString num)
-//{
-//    curIndex = tb_view->table->currentIndex ();
-//    qDebug() << num+num+num
-//             << " rCnt =" <<  tb_model->rowCount()
-//             << "  r:" << tb_view->table->rowAt(0)
-//             << "  id:"<< tb_model->data(tb_model->index(curIndex.row (),
-//                                                         tb_model->fieldIndex ("yvmye_id")),Qt::DisplayRole).toString()
-//             << "  pid:"<<  tb_model->data(tb_model->index(curIndex.row (),
-//                                                           tb_model->fieldIndex ("yvmye_parentid")),Qt::DisplayRole).toString()
-//             << "  ad:"<<  tb_model->data(tb_model->index(curIndex.row (),
-//                                                          tb_model->fieldIndex ("yvmye_ad")),Qt::DisplayRole).toString()
-//             << "  lft:"<<  tb_model->data(tb_model->index(curIndex.row (),
-//                                                           tb_model->fieldIndex ("yvmye_lft")),Qt::DisplayRole).toString()
-//             << "  rgt:"<<  tb_model->data(tb_model->index(curIndex.row (),
-//                                                           tb_model->fieldIndex ("yvmye_rgt")),Qt::DisplayRole).toString()
-//             <<"  *-*\n"   ;
-//}
