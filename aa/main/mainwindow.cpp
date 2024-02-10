@@ -136,6 +136,7 @@ void MainWindow::w_Tabs(HesapItem *hesapItem)
 
 void MainWindow::createTabs()
 {
+    counter ++;
     qDebug() << " // mw create tabs  //";
     w_TABs->clear();
     w_TABs->setIconSize(QSize(28, 28));
@@ -269,6 +270,8 @@ void MainWindow::createTabs()
     connect(colorButton, &QAbstractButton::clicked, this, &MainWindow::setColor);
     //    connect(this, &hC_main::sg_hTurColor,
     //            modelXML, &cm_TreeXML::hTurColor );
+
+    qDebug() << "-----------  COUNTER ----- "<< counter <<" ----------";
 }
 
 void MainWindow::closeEvent(QCloseEvent *)

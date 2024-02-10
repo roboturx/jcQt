@@ -27,6 +27,7 @@ public:
     explicit MainWindow();
     ~MainWindow();
 
+    int counter=0;
     DBase *dbase;
     hC_CLSN *clsn;
     hC_FRM  *firma ;

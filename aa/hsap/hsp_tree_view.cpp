@@ -405,7 +405,7 @@ void hsp_Tree_view::updateUi()
     editStartOrStopAction->setEnabled(rows);
     editPasteAction->setEnabled(modelXML->hasCutItem());
 
-    qDebug() << " upt ui HesapItem";
+    qDebug() << " upt ui HesapItem 11111";
 
     /// tree deki mevcut indexi internalpointer ile belirleyelim
     HesapItem *currentItem = static_cast<HesapItem *>(
@@ -428,7 +428,7 @@ void hsp_Tree_view::updateUi()
                           + QString::number(currentItem->isTopluHesap()) + " : "
                           + currentItem->hesapTuru() + " : " + currentItem->DBFile());
     }
-    qDebug() << " upt ui HesapItem";
+    qDebug() << " upt ui HesapItem 2222";
 }
 
 void hsp_Tree_view::setCurrentIndex(const QModelIndex &index)
