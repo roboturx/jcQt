@@ -199,7 +199,8 @@ void hC_YEVMIYE_D::tbkntrl()
     //tb_view->table->setSortingEnabled (true);
 
     //proxyModel->sort(0, Qt::AscendingOrder);
-
+    qDebug() << "yev xxx ";
+  //  qDebug() << "yevm_D_   :: tb_kntrl yevmNO= " << *SGNDyevmiyeNo;
     //////////////// filtering end
     tb_view->table->setFocus();
 
@@ -218,34 +219,30 @@ void hC_YEVMIYE_D::tbkntrl()
         int* max_id = new int{};
         *max_id = maxID.hC_NrMax ( tb_name, tb_flds->value (0,0));
         if (*max_id==1)
-            *max_id = 500;
+            *max_id = 100;
         ////////////////////////////////////////////////
 
-        qDebug() << "  hC_YEVMIYE_D_D_ yeni kayıt KOD :  -- " << *max_id <<" --";
+        qDebug() << "  hC_YEVMIYE_D_D_ yeni kayıt KOD :  -- "
+                 << *max_id <<" --" << SGNDyevmiyeNo;
 
          QSqlQuery query;
          QString qStr, mesaj("");
 
 
-       //  curIndex = tb_view->table->currentIndex ();
-       //  reccount=tb_model->rowCount();
+         qDebug() << " yvm-----D------ekle maxid: " << *max_id << " ------- yevmNo: " << SGNDyevmiyeNo ;
+         //qDebug() << " hesp adı: " << *SGNDhesapAd;
+            qStr = QString("INSERT INTO %1 ( f_yvmye_d_id, f_yvmye_id ) "
+                           " values ('%2', '%3')" )
+                    .arg(*tb_name,
+                         QString::number (*max_id),
+                         QString::number (SGNDyevmiyeNo)) ;
 
-       //  qDebug() << "  hC_YEVMIYE_D_D_ yeni kayıt KOD : 3 ";
-       //      qDebug() << "table name : " <<*tb_name;
-       //      qDebug() << "cur ind    : " << curIndex;
-       //      qDebug() << "recc       : " << reccount;
-       //      qDebug() << " max id    : " <<QString::number (*max_id);
-       //    //  qDebug() <<"item hesap kod " <<hc_hsp_currentHesapItem->hesapKod ();
-
-            qStr = QString("INSERT INTO "
-                           +*tb_name
-                           + " ( f_yvmye_d_id ) " ///*, f_yvmye_id*/
-                             " values ( '"
-                           + QString::number (*max_id)
-                           + /*"','"
-                           + QString::number (hc_hsp_currentHesapItem->hesapKod ()
-                           + 100000 // kod 100000 den başlasın )+*/
-                       "' )")  ;
+         // QString("INSERT INTO " +*tb_name +
+         //         " ( f_yvmye_d_id, "
+         //         "   f_yvmye_id ) values ('"
+         //         + QString::number (*max_id) +
+         //         "' , '"
+         //         + QString::number (*SGNDyevmiyeNo) + "' )")  ;
 
         qDebug() << "  hC_YEVMIYE_D_D_ yeni kayıt KOD :  ";
         if ( !query.exec(qStr) )
@@ -395,10 +392,11 @@ void hC_YEVMIYE_D::closeEvent(QCloseEvent *)
    qDebug() << "yvmye_D_  :: close ()";
 }
 
-void hC_YEVMIYE_D::slt_yevmiye(qint64 yevmiyeNo)
+void hC_YEVMIYE_D::slt_yevmiye(const qint64 *yevmiyeNo)
 {
-    qDebug() << "yevm_D_   :: slt_yevmiye :  heyooo emitted yevm no: " << yevmiyeNo;
-    SGNDyevmiyeNo = &yevmiyeNo;
+    qDebug() << "yevm_D_   :: slt_yevmiye :  heyooo emitted yevm no: "
+             << *yevmiyeNo <<"*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0";
+    SGNDyevmiyeNo = *yevmiyeNo;
     slt_yevmiyeHesapChanged();
 
 }
@@ -408,7 +406,7 @@ void hC_YEVMIYE_D::slt_yevmiyeHesapChanged()
 
 
     /// hesap değiştiğinde filtre değişsin
-    qDebug() << "yevm_D :: *-- 414 --* slt_yevmhesapChanged yevmNO= " << *SGNDyevmiyeNo;
+    qDebug() << "yevm_D_   :: slt_yevmhesapChanged yevmNO= " << SGNDyevmiyeNo;
  //   hc_hsp_currentHesapItem = currHspItem;
  //   tb_model->setFilter(
   //      QString("f_yvmye_hspID = '%1'")
@@ -417,7 +415,7 @@ void hC_YEVMIYE_D::slt_yevmiyeHesapChanged()
 
     // filtering proxy model1
 
-    QString pattern = QString::number(*SGNDyevmiyeNo);
+    QString pattern = QString::number(SGNDyevmiyeNo);
     pattern = QRegularExpression::escape (pattern);
     QRegularExpression::PatternOptions options =
         QRegularExpression::NoPatternOption

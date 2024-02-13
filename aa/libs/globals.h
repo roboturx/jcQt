@@ -1,7 +1,7 @@
 ﻿#ifndef GLOBALS_H
 #define GLOBALS_H
 
-#define DATABASE_NAME	"adb.file"
+#define DATABASE_NAME	"F:/aaGitMe/past/adb.file"
 #define valiDDate 01,01,2023
 
 

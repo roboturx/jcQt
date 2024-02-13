@@ -28,7 +28,7 @@ public:
 //    hC_hsp* win_hC_hsp;
 
     HesapItem* hc_hsp_currentHesapItem{};
-    qint64  *SGNDyevmiyeNo ;
+    qint64  SGNDyevmiyeNo ;
     QString *SGNDhesapAd  ;
 
     QLineEdit   *lE_yvmyeID=nullptr    ;
@@ -68,7 +68,7 @@ protected:
 public slots:
     //connect selectionmodel change
     void slt_yevmiyeHesapChanged();
-    void slt_yevmiye(qint64 yevmiyeNo);
+    void slt_yevmiye(const qint64 *yevmiyeNo);
 };
 
 #endif // hC_yvmye_H

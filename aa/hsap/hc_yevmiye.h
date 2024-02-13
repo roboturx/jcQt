@@ -63,7 +63,7 @@ private:
     hC_YEVMIYE_filter_wgt *filter_wgt_dty ;
 
 signals:
-    void sgnYevmiyeNo (const qint64 sgnYevmiyeNo); //Yevmiye Noyu detay hsap_d için emitle
+    void sgnYevmiyeNo (const qint64 *sgnYevmiyeNo); //Yevmiye Noyu detay hsap_d için emitle
 
 protected:
     void showEvent(QShowEvent *);

@@ -1,13 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
 #include "adrs/clsn.h"
 #include "adrs/frm.h"
 #include "hsap/hc_yevmiye.h"
 #include "hsap/hc_yevmiye_d.h"
 #include "hsap/hesapitem.h"
 #include "hsap/hsp_tree_view.h"
-#include "libs/globals.h"
+
 #include "libs/hc_helptree.h"
 #include "main/dbase.h"
 

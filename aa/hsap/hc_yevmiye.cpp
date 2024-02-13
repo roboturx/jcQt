@@ -174,16 +174,6 @@ void hC_YEVMIYE::tbui()
 void hC_YEVMIYE::tbkntrl()
 {
     qDebug() << "   0130 yvmye::tbkntrl ---- begin";
-
-    dlg_Date *clndr = new dlg_Date;
-    dlg_R *cb_R = new dlg_R();
-    dlG_hList *cb_hlist = new dlG_hList();
-
-    tb_view->table->setItemDelegateForColumn(2, clndr);
-
-    tb_view->table->setItemDelegateForColumn(5, cb_hlist);
-    tb_view->table->setItemDelegateForColumn(6, cb_R);
-
     //////////////// filtering
     proxyModel_dty = new hc_YEVMIYE_PRXYModel  (this);
     // setting proxyModel_dty to view
@@ -204,6 +194,16 @@ void hC_YEVMIYE::tbkntrl()
 
     //////////////// filtering end
     tb_view->table->setFocus();
+
+
+    dlg_Date *clndr = new dlg_Date;
+    dlg_R *cb_R = new dlg_R();
+    dlG_hList *cb_hlist = new dlG_hList();
+
+    tb_view->table->setItemDelegateForColumn(2, clndr);
+
+    tb_view->table->setItemDelegateForColumn(5, cb_hlist);
+    tb_view->table->setItemDelegateForColumn(6, cb_R);
 
 
 
@@ -332,7 +332,7 @@ void hC_YEVMIYE::tbkntrl()
             {
                 QModelIndex indx2;
                 if (tb_model->checkIndex(tb_view->table->model()->
-                                         index(tb_view->table->currentIndex().row()  - 1, 0)))
+                                        index(tb_view->table->currentIndex().row()  - 1, 0)))
                 {
                     indx2= tb_view->table->model()->
                             index(tb_view->table->currentIndex().row()  - 1, 0);
@@ -369,13 +369,13 @@ void hC_YEVMIYE::tbkntrl()
         // 011-02 yevmiye defterinde row değiştiğinde yevmiye noyu etrafa yayınlayalım
         // yevmiye detayları detay dosyasında filtrelensin
 
-        int yNo=tb_view->table->model()->index( Index.row()
+        qint64 yNo=tb_view->table->model()->index( Index.row()
               ,tb_model->fieldIndex ("f_yvmye_id") ).data().toInt();
-        int hNo=tb_view->table->model()->index( Index.row()
+        qint64 hNo=tb_view->table->model()->index( Index.row()
                ,tb_model->fieldIndex ("f_yvmye_hspid") ).data().toInt();
-        qDebug() << "yevm      :: connect selectionmodel-RowChanged : "
+        qDebug() << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx     yevm      :: connect selectionmodel-RowChanged : "
                     "heyooo emitting yevm no: " << yNo <<" hspNo:" << hNo;
-        emit sgnYevmiyeNo(yNo) ;
+        emit sgnYevmiyeNo(&yNo) ;
     });
 
     // --- 012 kolon değiştiğinde indexte değişsin
@@ -416,9 +416,11 @@ void hC_YEVMIYE::slt_hesapChanged(HesapItem *currHspItem)
     if( indx.row() >= 0 )
     {
         yvmye_ID = proxyModel_dty->data(indx).toInt() ;
-        qDebug()<< "yevm      :: slt_hesapChanged : aktif-pasifden : index r0w-: " <<indx.row() <<" emitting yevm_ID : "<< yvmye_ID;
+        qDebug() << "yevm      :: slt_hesapChanged : aktif-pasifden : index r0w-: "
+                 <<indx.row()
+                 <<" emitting yevm_ID : "<< yvmye_ID;
     }
-    emit sgnYevmiyeNo (yvmye_ID);
+    emit sgnYevmiyeNo (&yvmye_ID);
     qDebug() << "yevm      :: slt_hesapChanged : aktif-pasifden : emitted yevm ID: " << yvmye_ID;
 
     qDebug() << "yevm      :: slt_hesapChanged : aktif-pasifden : hesap değiştiğinde "
