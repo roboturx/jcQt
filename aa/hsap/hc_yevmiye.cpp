@@ -3,6 +3,7 @@
 #include "hsap/dlg/dlg_date.h"
 #include "hsap/dlg/dlg_hlist.h"
 #include "hsap/dlg/dlg_r.h"
+#include "qdatetime.h"
 
 //#include "uniqueproxymodel.h"
 
@@ -21,8 +22,8 @@ hC_YEVMIYE::hC_YEVMIYE() : hC_tBcreator ()
 
     /// setvalue  field no, dbf değişkeni, dbfTYPE, view header, viewda görünür
 
-    tb_flds->setValue ( 0, "f_yvmye_id"      , "INTEGER", "YEVMIYE_ID"/*, "0"*/);
-    tb_flds->setValue ( 1, "f_yvmye_hspid"   , "INTEGER", "HESAP_ID"/*, "0"*/);
+    tb_flds->setValue ( 0, "f_yvmye_id"      , "INTEGER", "YEVMIYE_ID", "0");
+    tb_flds->setValue ( 1, "f_yvmye_hspid"   , "INTEGER", "HESAP_ID", "0");
     // hesaplar ile hesap detay arası key
 
     tb_flds->setValue ( 2, "f_yvmye_tarih"   , "TEXT"   , "Tarih" );
@@ -233,17 +234,26 @@ void hC_YEVMIYE::tbkntrl()
 
         QSqlQuery query;
         QString qStr, mesaj("");
+        qStr = QString("INSERT INTO %1 ( f_yvmye_id, f_yvmye_hspid, f_yvmye_tarih, f_yvmye_no ) "
+                       " values ('%2', '%3', '%4', '%5')" )
+                   .arg(*tb_name,
+                        QString::number (*max_id),
+                        QString::number (hc_hsp_currentHesapItem->hesapKod ()),     // kod 100000 den başlasın
+                        QDate::currentDate().toString("dd/MM/yyyy"),
+                        QString::number (*max_id)
 
-        qStr = QString("INSERT INTO "
-                       + *tb_name
-                       + " ( f_yvmye_hspid, f_yvmye_id) values ( '"
+                        );
 
-                       + QString::number (hc_hsp_currentHesapItem->hesapKod ())      // kod 100000 den başlasın
+        // qStr = QString("INSERT INTO "
+        //                + *tb_name
+        //                + " ( f_yvmye_hspid, f_yvmye_id) values ( '"
 
-                       + "' , '"
+        //                + QString::number (hc_hsp_currentHesapItem->hesapKod ())      // kod 100000 den başlasın
 
-                       + QString::number (*max_id)
-                       + "' )")  ;
+        //                + "' , '"
+
+        //                + QString::number (*max_id)
+        //                + "' )")  ;
 
         if ( !query.exec(qStr) )
         {

@@ -21,9 +21,9 @@ hC_YEVMIYE_D::hC_YEVMIYE_D() : hC_tBcreator ()
 
     /// setvalue  field no, dbf değişkeni, dbfTYPE, view header, viewda görünür
 
-    tb_flds->setValue(  0, "f_yvmye_d_id", "INTEGER", "YEVMİYE_Detay_ID"/*, "0"*/);
+    tb_flds->setValue(  0, "f_yvmye_d_id", "INTEGER", "YEVMİYE_Detay_ID", "0");
     // hesap detay ile hesap günlük defter detay arası key
-    tb_flds->setValue ( 1, "f_yvmye_id"      , "INTEGER", "YEVMİYE_ID"/*, "0"*/);
+    tb_flds->setValue ( 1, "f_yvmye_id"      , "INTEGER", "YEVMİYE_ID", "0");
     tb_flds->setValue ( 2, "f_yvmye_d_tarih"   , "TEXT"   , "Tarih" );
     tb_flds->setValue ( 3, "f_yvmye_d_no"      , "TEXT"   , "Kayıt No" );
     tb_flds->setValue ( 4, "f_yvmye_d_aciklama", "TEXT"   , "Açıklama");

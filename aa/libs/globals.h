@@ -1,7 +1,8 @@
 ﻿#ifndef GLOBALS_H
 #define GLOBALS_H
-
-#define DATABASE_NAME	"F:/aaGitMe/past/adb.file"
+#define DATA_DIR        "F:/aaGitMe/past/"
+#define DATABASE_NAME	"adb.file"
+#define DATAXML_NAME	"evren.knm"
 #define valiDDate 01,01,2023
 
 

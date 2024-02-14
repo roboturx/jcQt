@@ -1,6 +1,7 @@
 #include "dlg_hlist.h"
 #include <QComboBox>
 #include "hsap/hsp_tree_model_xml.h"
+#include "libs/globals.h"
 
 dlG_hList::dlG_hList(QObject *parent)
     : QStyledItemDelegate{parent}
@@ -17,15 +18,17 @@ QWidget *dlG_hList::createEditor(QWidget *parent,
 
     hsp_Tree_model_XML *modelXML = new hsp_Tree_model_XML;
     QList<HesapItem *> hesapItems;
-    modelXML->load("aaa.knm");
-    modelXML->save("yedekkk");
+    QString dir = DATA_DIR;
+    QString xml = DATAXML_NAME;
+    modelXML->load(dir + xml );
+    modelXML->save(dir + "yedek.knm");
     hesapItems = modelXML->getListXML();
-    qDebug() << "----------------- size before------" << hesapItems.size();
+    qDebug() << "dlG_hList :: createEditor : size before------" << hesapItems.size();
 
     for (auto i = hesapItems.begin(), end = hesapItems.end(); i != end; ++i)
         cb_hspList->addItem((*i)->hesapAd());
 
-    qDebug() << "----------------- size after for ------" << hesapItems.size();
+    qDebug() << "                           : size after for ------" << hesapItems.size();
 
     return cb_hspList;
 }

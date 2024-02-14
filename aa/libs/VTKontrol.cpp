@@ -22,7 +22,10 @@ VTKontrolEt* VTKontrolEt::instance()
 
 void VTKontrolEt::SetupDB(){
     m_veritaban = QSqlDatabase::addDatabase("QSQLITE");
-    m_veritaban.setDatabaseName(DATABASE_NAME);
+    QString data= DATA_DIR;
+    QString data2= DATABASE_NAME;
+    data+=data2;
+    m_veritaban.setDatabaseName(data2);
 }
 
 bool VTKontrolEt::IsOpen(){
